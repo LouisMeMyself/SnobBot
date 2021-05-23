@@ -8,9 +8,9 @@ from constants import Constants
 class SnobPic:
     def __init__(self):
         self.hex_regex = re.compile("^[0-9a-fA-F]{6}")
-        with open("utils/Snob-logo.svg", "rb") as f:
+        with open("utils/snob-logo.svg", "rb") as f:
             self.snobSVG = f.read().decode("utf-8")
-        self.index = str(self.snobSVG).find("#F24E4D;}")
+        self.index = str(self.snobSVG).find("#5E6061;}")
         self.snobSVG = list(self.snobSVG)
 
     def do_profile_picture(self, content):
@@ -34,8 +34,8 @@ class SnobPic:
                     return "RGB colours are between 0 and 255 and need 3 integers, like '127 255 212' or '127,255,212'"
             if self.hex_regex.match(new_color) is not None and len(new_color) == 6:
                 self.snobSVG[self.index + 1: self.index + 7] = new_color
-                svg2png("".join(self.snobSVG), write_to="utils/Snob-logo.png")
-                return "Here is your personalized profile picture!", discord.File("utils/Snob-logo.png")
+                svg2png("".join(self.snobSVG), write_to="utils/snob-logo.png")
+                return "Here is your personalized profile picture!", discord.File("utils/snob-logo.png")
             return "Please write a HEX color or a RGB color. in these formats: '#00FFFF', '00FFFF', '0 255 255' or '0,255,255"
         except ValueError:
             return "Please write a HEX color or a RGB color. in these formats: '#00FFFF', '00FFFF', '0 255 255' or '0,255,255"
