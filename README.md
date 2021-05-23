@@ -1,6 +1,6 @@
-# [SherpaBot](https://github.com/LouisMeMyself/sherpabot)
+# [SnobBot](https://github.com/LouisMeMyself/snobbot)
 
-A small bot to create profile picture using Sherpa logo.
+A small bot to create profile picture using Snob logo.
 
 Installation
 -------

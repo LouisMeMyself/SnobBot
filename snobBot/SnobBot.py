@@ -8,11 +8,11 @@ from discord import NotFound
 from discord.ext import commands
 
 from constants import Constants, Channels
-from sherpaBot import SherpaPic
+from snobBot import SnobPic
 
 
-class SherpaBot:
-    sherpaPic_ = SherpaPic.SherpaPic()
+class SnobBot:
+    snobPic_ = SnobPic.SnobPic()
     bot = commands.Bot
     channels = Channels.Channels
 
@@ -22,7 +22,7 @@ class SherpaBot:
         print(self.channels.reaction_channel, self.channels.suggestion_channel, self.channels.profile_picture)
 
     async def on_ready(self):
-        """starts sherpabot"""
+        """starts snobbot"""
         for msg_id in Constants.GUIDELINES_MSG_ID:
             for channel in self.channels.reaction_channel.values():
                 try:
@@ -31,12 +31,12 @@ class SherpaBot:
                     await msg.add_reaction(Constants.emoji)
                 except NotFound:
                     continue
-        print('sherpaBot have logged in as {0.user}'.format(self.bot))
+        print('snobBot have logged in as {0.user}'.format(self.bot))
 
-    async def sherpapic(self, ctx):
+    async def snobpic(self, ctx):
         """command for personalised profile picture, input a color (RGB or HEX) output a reply with the profile picture"""
         if ctx.message.guild.id in self.channels.profile_picture and ctx.message.channel.id == self.channels.profile_picture[ctx.message.guild.id].id:
-            answer = self.sherpaPic_.do_profile_picture(ctx.message.content)
+            answer = self.snobPic_.do_profile_picture(ctx.message.content)
             if len(answer) == 2:
                 await ctx.reply(answer[0], file=answer[1])
             else:
@@ -45,14 +45,14 @@ class SherpaBot:
 
     async def on_command_error(self, ctx, error):
         if ctx.message.channel.id == self.channels.profile_picture[ctx.message.guild.id].id and isinstance(error, commands.CommandNotFound):
-            await ctx.reply(Constants.ERROR_ON_SHERPAPIC)
+            await ctx.reply(Constants.ERROR_ON_SNOBPIC)
             return
         raise error
 
     async def suggest(self, ctx):
         """command for suggestions"""
         if not ctx.message.guild.id in self.channels.suggestion_channel:
-            print("Channel " + Constants.SHERPASUGGEST_CHANNEL_NAME + " not found in " + ctx.message.guild)
+            print("Channel " + Constants.SNOBSUGGEST_CHANNEL_NAME + " not found in " + ctx.message.guild)
             return
         msg = ctx.message.content[9:]
         if msg != "":
@@ -67,9 +67,9 @@ class SherpaBot:
         return
 
     async def on_raw_reaction_add(self, payload):
-        """Add sherpa role when a reaction is added on a particular message (not a message from sherpabot or a
-        reaction of sherpabot) """
-        if payload.user_id == self.bot.user.id or payload.message_id == self.bot.user.id:  # check if user that reacted is not sherpaBot and that the message isn't from sherpaBot
+        """Add snob role when a reaction is added on a particular message (not a message from snobbot or a
+        reaction of snobbot) """
+        if payload.user_id == self.bot.user.id or payload.message_id == self.bot.user.id:  # check if user that reacted is not snobBot and that the message isn't from snobBot
             return
         if not (payload.guild_id in self.channels.reaction_channel and
                 self.channels.reaction_channel[payload.guild_id].id == payload.channel_id):
@@ -82,7 +82,7 @@ class SherpaBot:
 
     async def on_raw_reaction_remove(self, payload):
         """harder to remove than add a role, to do"""
-        if payload.user_id == self.bot.user.id or payload.message_id == self.bot.user.id:  # check if user that reacted is not sherpaBot and that the message isn't from sherpaBot
+        if payload.user_id == self.bot.user.id or payload.message_id == self.bot.user.id:  # check if user that reacted is not snobBot and that the message isn't from snobBot
             return
         if not (payload.guild_id in self.channels.reaction_channel and
                 self.channels.reaction_channel[payload.guild_id].id == payload.channel_id):
