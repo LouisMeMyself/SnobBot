@@ -23,9 +23,18 @@ async def on_ready():
 
 
 @bot.command()
-async def snobpic(ctx):
+async def snobfur(ctx):
     """command for personalised profile picture, input a color (RGB or HEX) output a reply with the profile picture"""
-    print("oui")
+    await snobBot.snobpic(ctx)
+
+@bot.command()
+async def snobeyes(ctx):
+    """command for personalised profile picture, input a color (RGB or HEX) output a reply with the profile picture"""
+    await snobBot.snobpic(ctx)
+
+@bot.command()
+async def snobfull(ctx):
+    """command for personalised profile picture, input a color (RGB or HEX) output a reply with the profile picture"""
     await snobBot.snobpic(ctx)
 
 

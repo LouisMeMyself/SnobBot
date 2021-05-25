@@ -1,4 +1,6 @@
-PROFILE_PICTURE_COMMAND = "!snobpic"
+PROFILE_PICTURE_COMMAND = "!snobfur"
+PROFILE_PICTURE_EYES = "!snobeyes"
+PROFILE_PICTURE_FULL = "!snobfull"
 SNOBPIC_CHANNEL_NAME = "🦸-profile-pictures"
 SNOBSUGGEST_CHANNEL_NAME = "💡-ideas-and-feedback"
 
