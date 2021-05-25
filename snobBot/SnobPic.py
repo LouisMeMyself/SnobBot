@@ -44,7 +44,7 @@ class SnobPic:
                 colors = colors.split(" ")
                 if len(colors) == 6:  # R G B and R G B
                     colors = (",".join(colors[:3]), ",".join(colors[3:]))
-                elif len(colors) == 2:  # Hexa/Hexa or R,G,B/R,G,B or Hexa/R,G,B or R,G,B/Hexa
+                if len(colors) == 2:  # Hexa/Hexa or R,G,B/R,G,B or Hexa/R,G,B or R,G,B/Hexa
                     colors = ("".join(colors[0]), "".join(colors[1]))
                 elif len(colors) == 4:
                     if len(colors[0]) >= 6:  # Hexa/R G B
